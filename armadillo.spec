@@ -1,12 +1,12 @@
 Summary:	C++ linear algebra library
 Summary(pl.UTF-8):	Biblioteka C++ do algebry liniowej
 Name:		armadillo
-Version:	3.4.3
+Version:	3.4.4
 Release:	1
 License:	LGPL v3+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.gz
-# Source0-md5:	300129a4f02599fdbdfc5966f9662949
+# Source0-md5:	93a45131f8e5ee6393d962f33fdc92a6
 URL:		http://arma.sourceforge.net/
 BuildRequires:	blas-devel
 BuildRequires:	boost-devel >= 1.34
