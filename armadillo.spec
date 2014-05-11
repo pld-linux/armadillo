@@ -1,16 +1,18 @@
 Summary:	C++ linear algebra library
 Summary(pl.UTF-8):	Biblioteka C++ do algebry liniowej
 Name:		armadillo
-Version:	3.930.0
+Version:	4.300.2
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.gz
-# Source0-md5:	0e285c83da8b736e68c71f76479e6b00
+# Source0-md5:	16c8bf27e989b2eaf6e4096a4c056269
 URL:		http://arma.sourceforge.net/
+BuildRequires:	arpack-devel
 BuildRequires:	blas-devel
 BuildRequires:	boost-devel >= 1.34
-BuildRequires:	cmake >= 2.6
+BuildRequires:	cmake >= 2.8
+BuildRequires:	hdf5-devel
 BuildRequires:	lapack-devel
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -30,8 +32,10 @@ Summary:	Header files for Armadillo library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Armadillo
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	arpack-devel
 Requires:	blas-devel
 Requires:	boost-devel >= 1.34
+Requires:	hdf5-devel
 Requires:	lapack-devel
 Requires:	libstdc++-devel
 
@@ -88,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE.txt README.txt
 %attr(755,root,root) %{_libdir}/libarmadillo.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.3
+%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.4
 
 %files devel
 %defattr(644,root,root,755)
