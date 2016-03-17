@@ -1,21 +1,21 @@
 Summary:	C++ linear algebra library
 Summary(pl.UTF-8):	Biblioteka C++ do algebry liniowej
 Name:		armadillo
-Version:	5.200.2
+Version:	6.600.4
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.gz
-# Source0-md5:	ef57ba4c473a3b67c672441a7face09e
+# Source0-md5:	bdd3a34aa9a350a2add53329118cb415
 URL:		http://arma.sourceforge.net/
 BuildRequires:	SuperLU-devel >= 4
 BuildRequires:	arpack-devel
 BuildRequires:	blas-devel
-BuildRequires:	boost-devel >= 1.34
 BuildRequires:	cmake >= 2.8
 BuildRequires:	hdf5-devel
 BuildRequires:	lapack-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,28 +36,16 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	SuperLU >= 4
 Requires:	arpack-devel
 Requires:	blas-devel
-Requires:	boost-devel >= 1.34
 Requires:	hdf5-devel
 Requires:	lapack-devel
 Requires:	libstdc++-devel
+Obsoletes:	armadillo-static
 
 %description devel
 Header files for Armadillo library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Armadillo.
-
-%package static
-Summary:	Static Armadillo library
-Summary(pl.UTF-8):	Statyczna biblioteka Armadillo
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static Armadillo library.
-
-%description static -l pl.UTF-8
-Statyczna biblioteka Armadillo.
 
 %package apidocs
 Summary:	Armadillo API documentation
@@ -75,6 +63,7 @@ Dokumentacja API biblioteki Armadillo.
 
 %build
 %cmake . \
+	-DDETECT_HDF5=ON \
 	-DINSTALL_LIB_DIR=%{_libdir}
 
 %{__make}
@@ -93,9 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.txt README.txt
+%doc LICENSE.txt README.txt docs.html
 %attr(755,root,root) %{_libdir}/libarmadillo.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.5
+%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.6
 
 %files devel
 %defattr(644,root,root,755)
@@ -104,3 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/armadillo_bits
 %dir %{_datadir}/Armadillo
 %{_datadir}/Armadillo/CMake
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc docs.html armadillo_icon.png armadillo_nicta_2010.pdf rcpp_armadillo_csda_2014.pdf
