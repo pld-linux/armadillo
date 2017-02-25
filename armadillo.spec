@@ -1,12 +1,12 @@
 Summary:	C++ linear algebra library
 Summary(pl.UTF-8):	Biblioteka C++ do algebry liniowej
 Name:		armadillo
-Version:	6.700.7
+Version:	7.800.1
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.gz
-# Source0-md5:	8116185e1d7391eed3bf6c500f81b4d8
+Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.xz
+# Source0-md5:	e094351771c40a6e06e1a9c1ffdfc2b8
 URL:		http://arma.sourceforge.net/
 BuildRequires:	SuperLU-devel >= 4
 BuildRequires:	arpack-devel
@@ -16,6 +16,8 @@ BuildRequires:	hdf5-devel
 BuildRequires:	lapack-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -87,13 +89,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE.txt README.txt docs.html
 %attr(755,root,root) %{_libdir}/libarmadillo.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.6
+%attr(755,root,root) %ghost %{_libdir}/libarmadillo.so.7
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libarmadillo.so
 %{_includedir}/armadillo
 %{_includedir}/armadillo_bits
+%{_pkgconfigdir}/armadillo.pc
 %dir %{_datadir}/Armadillo
 %{_datadir}/Armadillo/CMake
 
