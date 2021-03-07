@@ -54,7 +54,7 @@ Pliki nagłówkowe biblioteki Armadillo.
 Summary:	Armadillo API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Armadillo
 Group:		Documentation
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 API and internal documentation for Armadillo library.
