@@ -1,21 +1,22 @@
 Summary:	C++ linear algebra library
 Summary(pl.UTF-8):	Biblioteka C++ do algebry liniowej
 Name:		armadillo
-Version:	10.1.2
+Version:	10.8.2
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/arma/%{name}-%{version}.tar.xz
-# Source0-md5:	1419e8ef00a8e08a34a5e2e1164ef042
-URL:		http://arma.sourceforge.net/
+Source0:	https://downloads.sourceforge.net/arma/%{name}-%{version}.tar.xz
+# Source0-md5:	ecf2ed979c7f950d6dfaf17b0a3d02cf
+URL:		https://arma.sourceforge.net/
 BuildRequires:	SuperLU-devel >= 5
 BuildRequires:	arpack-devel
 BuildRequires:	blas-devel
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	hdf5-devel
 BuildRequires:	lapack-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.8.3
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -41,8 +42,8 @@ Requires:	arpack-devel
 Requires:	blas-devel
 Requires:	hdf5-devel
 Requires:	lapack-devel
-Requires:	libstdc++-devel
-Obsoletes:	armadillo-static
+Requires:	libstdc++-devel >= 6:4.8.3
+Obsoletes:	armadillo-static < 6
 
 %description devel
 Header files for Armadillo library.
@@ -66,7 +67,9 @@ Dokumentacja API biblioteki Armadillo.
 %setup -q
 
 %build
-%cmake . \
+install -d build
+cd build
+%cmake .. \
 	-DDETECT_HDF5=ON \
 	-DINSTALL_LIB_DIR=%{_libdir}
 
@@ -75,7 +78,7 @@ Dokumentacja API biblioteki Armadillo.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
